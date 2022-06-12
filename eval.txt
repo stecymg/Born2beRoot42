@@ -1,0 +1,91 @@
+Q : Différencen entre Debian et CentOS ?
+R : Debian est composé de logiciels libres. Il est adapté aux serveurs et est beaucoup plus stable. Il prend moins de place dans le disque dur. 
+    CentOS a été conçu pour fonctionner avec Red Hart Linux. Son interface est plus difficile. 
+
+Q : Pourquoi j'ai choisi Debian ?
+R : Car plus facile donc plus adapté aux débutants.
+
+Q : Qu'est-ce-qu'une machine virtuelle ? La virtualisation ? 
+R : Une machine virtuelle est un environnement virtuel qui fonctionne comme un système informatique virtuel, avec son propre processeur, sa mémoire, son interface réseau et son espace de stockage. La virtualisation consiste à créer des versions virtuelles. On peut exploiter plusieurs systèmes d'exploitation et exécuter de nombreuses applications sur un seul serveur.
+
+Q : À quoi sert une VM ?
+R : Elle permet d'exécuter simultanément plusieurs systèmes d'exploitation sur un seul ordinateur, comme par exemple une distribution Linux sur un ordi portable sous MacOS.
+
+Q : Quel est son but ?
+R : Disposer de nombreux serveurs virtuels sur un serveur physique.
+
+Q : Différence entre Aptitude et Apt ? 
+R : Aptitude est un gestionnaire de package de haut niveau tandis qu'Apt est un gestionnare de package de niveau inférieur. Aptitude a des fontionnalités plus vaste.
+
+Q : Qu'est-ce-que AppArmor ?
+R : "Application Armor" est un logiciel de sécurité pour linux qui permet à l'administrateur système d'associer à chaque programme un profil de sécurité.
+
+Q : Qu'est-ce-que la SSh ?
+R : Secure Shell est un protocole de communication réseau qui permet à deux ordinateurs de communiquer et partager des données en tout sécurité.
+
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+| Pour créer un new user.        |
+| sudo adduser username                    | <- créer un nouvel utilisateur
+| sudo chage -l username                   | <- Verify password expire info for new user
+| sudo adduser username sudo               | <- ajouter le nouvel utilisateur au groupe sudo 
+| sudo adduser username user42             | <- ajouter le nouvel utilisateur au groupe user42
+\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+
+
+ Tout ce qu'il faut checker ou faire
+                                     
+|**********************************************|
+| 1) lsblk                                     1 <- Check les partitions
+| 2) sudo aa-status                            2 <- AppArmor status
+| 3) getent group sudo                         3 <- check si les utilisateurs ont bin été ajoutés au groupe sudo
+| 4) getent group user42                       4 <- check si les utilisateurs ont bien été ajouté au groupe user42
+| 5) sudo systemctl status ssh                 5 <- check le status ssh
+| 6) sudo ufw status numbered                  6 <- check le status ufw 
+| 7) ssh username@ipadress -p 4242             7 <- connecter la VM à son terminal via ssh 
+| 8) nano ou vim /etc/sudoers.d/<filename>     8 <- yes, sudo config file. tu peux faire $ ls /etc/sudoers.d first
+| 9) nano ou vim /etc/login.defs               9 <- password expire policy
+| 10) nano ou vim /etc/pam.d/common-password   10 <- password policy
+| 11) sudo crontab -u root -e                  11 <- configurer cron
+| 12) sudo crontab -l                          12 <- cron check
+|**********************************************|
+
+
+
+Comment changer le Hostname ?
+hostnamectl ou hostname                                    <- check le hostname actuel 
+hostnamectl set-hostname newhostname                       <- pour changer le hostname
+sudo nano /etc/hostname    OU    sudo nano /etc/hosts      <- changer avec le nouvel hostname
+sudo reboot                                                <- redémarrer 
+
+
+
+Comment ajouter et supprimer le port 8080 dans UFW ?
+sudo ufw allow 8080                <- creer un ufw 
+sudo ufw status numbered           <- check si bien ajouté
+sudo ufw delete nbr                <- supprimer le 8080 créer
+
+
+
+Position des sudo log dans /var/log/sudo ?
+cd /var/log/sudo/00/00 & ls
+il y aura des dossiers nommés 01 0B etc : ce sont les logs dont on a besoin 
+sudo apt update
+ls
+Maintenant on voit un nouveau dossier. 
+cd [nomdunouveaudossier] && ls
+cat log          <- input log
+cat ttyout       <- output log 
+
+
+Comment run le script toutes les 30 sec ?
+sudo crontab -e 
+Supprimer ou valider le precedent "schredule" cron et ajouter les lignes suivante dans le fichire crontab
+|*************************************************|
+| */1 * * * * /path/to/monitoring.sh              |
+| */1 * * * * sleep 30s && /path/to/monitoring.sh |
+|*************************************************|
+To stop script running on boot you just need to remove or commit
+|********************************|
+| @reboot /path/to/monitoring.sh |
+|********************************|
+line in crontab file.
