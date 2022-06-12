@@ -24,11 +24,11 @@ Q : Qu'est-ce-que la SSh ?
 R : Secure Shell est un protocole de communication réseau qui permet à deux ordinateurs de communiquer et partager des données en tout sécurité.
 
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
-| Pour créer un new user.        |
-| sudo adduser username                    | <- créer un nouvel utilisateur
-| sudo chage -l username                   | <- Verify password expire info for new user
-| sudo adduser username sudo               | <- ajouter le nouvel utilisateur au groupe sudo 
-| sudo adduser username user42             | <- ajouter le nouvel utilisateur au groupe user42
+| Pour créer un new user.                    |
+| sudo adduser username                      | <- créer un nouvel utilisateur
+| sudo chage -l username                     | <- Verify password expire info for new user
+| sudo adduser username sudo                 | <- ajouter le nouvel utilisateur au groupe sudo 
+| sudo adduser username user42               | <- ajouter le nouvel utilisateur au groupe user42
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 
 
@@ -68,13 +68,14 @@ sudo ufw delete nbr                <- supprimer le 8080 créer
 
 Position des sudo log dans /var/log/sudo ?
 cd /var/log/sudo/00/00 & ls
-il y aura des dossiers nommés 01 0B etc : ce sont les logs dont on a besoin 
+// il y aura des dossiers nommés 01 0B etc : ce sont les logs dont on a besoin 
 sudo apt update
 ls
-Maintenant on voit un nouveau dossier. 
+// Maintenant on voit un nouveau dossier. 
 cd [nomdunouveaudossier] && ls
 cat log          <- input log
 cat ttyout       <- output log 
+
 
 
 Comment run le script toutes les 30 sec ?
