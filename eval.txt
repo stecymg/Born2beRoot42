@@ -60,9 +60,10 @@ sudo reboot                                                <- redémarrer
 
 
 Comment ajouter et supprimer le port 8080 dans UFW ?
+sudo ufw delete 22                 <- suppimer le port 22
 sudo ufw allow 8080                <- creer un ufw 
 sudo ufw status numbered           <- check si bien ajouté
-sudo ufw delete nbr                <- supprimer le 8080 créer
+sudo ufw delete 8080               <- supprimer le 8080 créer
 
 
 
