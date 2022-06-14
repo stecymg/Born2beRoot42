@@ -27,6 +27,7 @@ R : Secure Shell est un protocole de communication réseau qui permet à deux or
 | Pour créer un new user.                    |
 | sudo adduser username                      | <- créer un nouvel utilisateur
 | sudo chage -l username                     | <- Verify password expire info for new user
+| sudo groupadd namegroup                    | <- creer un nouveau groupe
 | sudo adduser username sudo                 | <- ajouter le nouvel utilisateur au groupe sudo 
 | sudo adduser username user42               | <- ajouter le nouvel utilisateur au groupe user42
 \/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
